@@ -24,6 +24,8 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $with = ['unit'];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -42,4 +44,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

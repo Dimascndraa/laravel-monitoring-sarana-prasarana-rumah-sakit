@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Unit;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +15,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserSeeder::class);
+        Unit::create([
+            'name' => "UPSRS",
+            'code' => "UPSRS",
+            'status' => 1,
+        ]);
         // \App\Models\User::factory(10)->create();
     }
 }

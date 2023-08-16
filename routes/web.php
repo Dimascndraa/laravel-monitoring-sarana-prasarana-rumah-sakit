@@ -1,21 +1,8 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\DatatablesController;
-use App\Http\Controllers\FormController;
-use App\Http\Controllers\FormpluginsController;
-use App\Http\Controllers\IconsController;
-use App\Http\Controllers\InfoappController;
-use App\Http\Controllers\IntelController;
-use App\Http\Controllers\MiscellaneousController;
-use App\Http\Controllers\NotificationsController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\PluginController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\StatisticsController;
-use App\Http\Controllers\TablesController;
-use App\Http\Controllers\UiController;
-use App\Http\Controllers\UtilitiesController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,8 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth'])->group(function () {
+    // Modul Unit
+    Route::resource('/units', UnitController::class);
+    Route::get('/get-data-unit', [UnitController::class, 'getDataUnit']);
+    Route::post('/edit-unit', [UnitController::class, 'editUnit']);
+    Route::post('/add-unit', [UnitController::class, 'addUnit']);
 
-// Route::get('/', [IntelController::class, 'welcome'])->name('welcome');
+    // Modul User
+    Route::resource('/users', UserController::class);
+    Route::put('/users/{user:id}/pindah', [UserController::class, 'pindahkan']);
+    Route::put('/users/{user:id}/update-password', [UserController::class, 'updatePassword']);
+    Route::put('/users/{user:id}/akses', [UserController::class, 'akses']);
+});
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/default_menu.php';
